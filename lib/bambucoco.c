@@ -13,7 +13,7 @@ void add_cardapio() {
 
   FILE *arquivo;
 
-  arquivo = fopen("./data/restaurante/cardapio.dat", "ab+");
+  arquivo = fopen("./data/restaurante/cardapio.csv", "a+");
 
   if (arquivo == NULL) {
     printf("erro ao abrir arquivo, abortando\n");
@@ -23,13 +23,16 @@ void add_cardapio() {
   printf("Digite o ID do item\n>>> ");
   scanf("%d", &aux_cardapio.id_cardapio);
 
+  limpar_buffer();
+
   printf("Digite o nome do item\n>>> ");
   fgets(aux_cardapio.nome, sizeof(aux_cardapio.nome), stdin);
 
   printf("Digite o valor do item\n>>> ");
   scanf("%f", &aux_cardapio.preco);
 
-  fwrite(&aux_cardapio, sizeof(ItemCardapio), 1, arquivo);
+  fprintf(arquivo, "%d, %s, %f\n", aux_cardapio.id_cardapio, aux_cardapio.nome,
+          aux_cardapio.preco);
 
   fclose(arquivo);
 }
