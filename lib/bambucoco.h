@@ -1,5 +1,8 @@
+#ifndef BAMBUCOCO_H
+#define BAMBUCOCO_H
+
 typedef struct ItemCardapio {
-  int id;
+  int id_cardapio;
   char nome[30];
   float preco;
 } ItemCardapio;
@@ -15,3 +18,8 @@ typedef struct Mesa {
   float valor_total;
   Pedido comanda[10];
 } Mesa;
+
+void add_cardapio();
+void limpar_buffer();
+
+#endif // BAMBUCOCO_H
