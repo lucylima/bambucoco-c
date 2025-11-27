@@ -1,0 +1,29 @@
+# Object files
+*.o
+*.obj
+
+# Executables
+*.out
+*.exe
+a.out
+bin/
+
+# Libraries
+*.so
+*.a
+*.lib
+*.dll
+
+# Debugging and build artifacts
+*.d
+*.dep
+*.bak
+*.log
+*.swp
+*.swo
+
+.vscode/
+.idea/
+*.user
+*.suo
+*~
