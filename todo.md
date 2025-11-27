@@ -4,13 +4,12 @@
 Esta fase prepara o terreno para o código.
 
 - [x] **Criar diretório do projeto** e inicializar git (`git init`).
-- [ ] **Criar estrutura de arquivos**:
-    - [ ] `main.c` (ponto de entrada).
-    - [ ] `bambucoco.h` (definições de structs e protótipos de funções).
-    - [ ] `funcoes.c` (implementação da lógica).
-    - [ ] `dados/` (pasta para guardar os arquivos .txt ou .csv).
-- [ ] **Configurar Makefile**: Criar um `Makefile` simples para compilar o projeto rapidamente no terminal.
-- [ ] **Teste "Hello World"**: Garantir que o ambiente de compilação está funcionando.
+- [x] **Criar estrutura de arquivos**:
+    - [x] `main.c` (ponto de entrada).
+    - [x] `bambucoco.h` (definições de structs e protótipos de funções).
+    - [x] `bambucoco.c` (implementação da lógica).
+    - [x] `./data/` (pasta para guardar os arquivos .txt ou .csv).
+- [x] **Configurar Makefile**: Criar um `Makefile` simples para compilar o projeto rapidamente no terminal.
 
 ### 🧱 Fase 2: Definição de Dados (Structs e Matriz)
 
