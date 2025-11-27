@@ -1,17 +1,19 @@
 #include "interface.h"
+#include "bambucoco.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-int menu() {
+void menu() { // funcao que imprime um menu simples em ASCII
   FILE *arq;
 
   char buffer[200];
 
   arq = fopen("./data/interface/menu-ascii.txt", "r");
 
+  // se arquivo esta com problemas o programa nao roda
   if (arq == NULL) {
-    printf("Erro ao abrir o arquivo, encerrando");
-    return 1;
+    printf("Erro ao abrir o arquivo, encerrando\n");
+    exit(1);
   }
 
   while (fgets(buffer, sizeof(buffer), arq) != NULL) {
@@ -19,9 +21,30 @@ int menu() {
   }
 
   printf("\n");
-  printf(">>> ");
 
   fclose(arq);
+}
 
-  return 0;
+void interface_restaurante(Mesa m[5][5], int linhas, int colunas) {
+  // imprimir "cabeçalho" do restaurante
+  // os numeros sao pra guiar os usuarios
+  printf("\t0         1       2       3       4\n");
+  printf("+-----------+-----------+-----------+-----------+\n");
+  printf("|        COZINHA        |          BAR          |\n");
+  printf("+-----------+-----------+-----------+-----------+\n");
+
+  for (int i = 0; i < linhas; i++) {
+    printf("%d  |  ", i);
+    for (int j = 0; j < colunas; j++) {
+      printf("[%c %d]\t", m[i][j].status, m[i][j].id_mesa);
+    }
+    printf("|\n");
+  }
+
+  printf("+-----------+-----------+-----------+-----------+\n");
+  printf("\t ENTRADA                        CAIXA\n");
+  printf("+-----------+-----------+-----------+-----------+\n");
+  printf("\"L\" Livre - "
+         "\"O\" Ocupado\n");
+  printf("+-----------+-----------+-----------+-----------+\n");
 }
