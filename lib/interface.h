@@ -5,6 +5,6 @@
 
 void menu();
 
-void interface_restaurante(Mesa m[5][5], int linhas, int colunas);
+void interface_restaurante(Mesa m[MAX_LINHAS][MAX_COLUNAS]);
 
 #endif // INTERFACE_H

@@ -1,6 +1,9 @@
 #ifndef BAMBUCOCO_H
 #define BAMBUCOCO_H
 
+#define MAX_COLUNAS 5
+#define MAX_LINHAS 5
+
 typedef struct ItemCardapio {
   int id_cardapio;
   char nome[30];

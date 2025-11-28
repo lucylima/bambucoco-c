@@ -25,7 +25,7 @@ void menu() { // funcao que imprime um menu simples em ASCII
   fclose(arq);
 }
 
-void interface_restaurante(Mesa m[5][5], int linhas, int colunas) {
+void interface_restaurante(Mesa m[MAX_LINHAS][MAX_COLUNAS]) {
   // imprimir "cabeçalho" do restaurante
   // os numeros sao pra guiar os usuarios
   printf("\t0         1       2       3       4\n");
@@ -33,9 +33,9 @@ void interface_restaurante(Mesa m[5][5], int linhas, int colunas) {
   printf("|        COZINHA        |          BAR          |\n");
   printf("+-----------+-----------+-----------+-----------+\n");
 
-  for (int i = 0; i < linhas; i++) {
+  for (int i = 0; i < MAX_LINHAS; i++) {
     printf("%d  |  ", i);
-    for (int j = 0; j < colunas; j++) {
+    for (int j = 0; j < MAX_COLUNAS; j++) {
       printf("[%c %d]\t", m[i][j].status, m[i][j].id_mesa);
     }
     printf("|\n");
