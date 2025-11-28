@@ -2,6 +2,7 @@
 #include "bambucoco.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void menu() { // funcao que imprime um menu simples em ASCII
   FILE *arq;
@@ -46,5 +47,40 @@ void interface_restaurante(Mesa m[MAX_LINHAS][MAX_COLUNAS]) {
   printf("+-----------+-----------+-----------+-----------+\n");
   printf("\"L\" Livre - "
          "\"O\" Ocupado\n");
+  printf("+-----------+-----------+-----------+-----------+\n");
+}
+
+void interface_cardapio() {
+  FILE *arquivo;
+  char buffer[1000];
+  char *token;
+
+  arquivo = fopen("../data/restaurante/cardapio.csv", "r");
+
+  if (arquivo == NULL) {
+    printf("erro ao abrir arquivo do cardpaio, tente inserir algo primeiro\n");
+  }
+
+  printf("+-----------+-----------+-----------+-----------+\n");
+  printf("\tID\t| Nome\t| preco\t|\n");
+  printf("+-----------+-----------+-----------+-----------+\n");
+  while (!feof(arquivo)) {
+
+    fgets(buffer, 1000, arquivo);
+
+    token = strtok(buffer, ", ");
+
+    while (token != NULL) {
+      printf("|\t");
+      printf("%s\t", token);
+      token = strtok(NULL, ", ");
+      printf("%s\t", token);
+      token = strtok(NULL, ", ");
+      printf("%s\t", token);
+      printf("\n|");
+      token = strtok(NULL, ", ");
+    }
+  }
+
   printf("+-----------+-----------+-----------+-----------+\n");
 }

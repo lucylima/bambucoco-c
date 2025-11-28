@@ -25,7 +25,7 @@ int main(void) {
 
     case '1':
       limpar_buffer();
-      interface_restaurante(restaurante, LINHAS, COLUNAS);
+      interface_restaurante(restaurante);
       printf("Deseja reservar uma mesa? S/n\n>>> ");
       scanf("%c", &op);
 
@@ -55,6 +55,11 @@ int main(void) {
       case '1':
         add_cardapio();
         break;
+      case '2':
+        break;
+      case '3':
+        interface_cardapio();
+        break;
       }
 
       break;
@@ -70,7 +75,7 @@ int main(void) {
 
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]) {
   int i, j = 0;
-  interface_restaurante(r, LINHAS, COLUNAS);
+  interface_restaurante(r);
   printf("Digite a mesa que deseja reservar, ex 0 1\n>>> ");
   scanf("%d %d", &i, &j);
   r[i][j].status = 'O';

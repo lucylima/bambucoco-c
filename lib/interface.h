@@ -6,5 +6,6 @@
 void menu();
 
 void interface_restaurante(Mesa m[MAX_LINHAS][MAX_COLUNAS]);
+void interface_cardapio();
 
 #endif // INTERFACE_H
