@@ -59,6 +59,7 @@ void interface_cardapio() {
 
   if (arquivo == NULL) {
     printf("erro ao abrir arquivo do cardpaio, tente inserir algo primeiro\n");
+    return;
   }
 
   printf("\t+-----------------------------+\n");
