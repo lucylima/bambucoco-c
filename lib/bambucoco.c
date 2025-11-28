@@ -29,6 +29,7 @@ void add_cardapio() {
   printf("Digite o nome do item\n>>> ");
   fgets(aux_cardapio.nome, sizeof(aux_cardapio.nome), stdin);
   aux_cardapio.nome[strcspn(aux_cardapio.nome, "\n")] = '\0';
+
   printf("Digite o valor do item\n>>> ");
   scanf("%f", &aux_cardapio.preco);
 
