@@ -55,15 +55,15 @@ void interface_cardapio() {
   char buffer[1000];
   char *token;
 
-  arquivo = fopen("../data/restaurante/cardapio.csv", "r");
+  arquivo = fopen("./data/restaurante/cardapio.csv", "r+");
 
   if (arquivo == NULL) {
     printf("erro ao abrir arquivo do cardpaio, tente inserir algo primeiro\n");
   }
 
-  printf("+-----------+-----------+-----------+-----------+\n");
-  printf("\tID\t| Nome\t| preco\t|\n");
-  printf("+-----------+-----------+-----------+-----------+\n");
+  printf("\t+-----------------------------+\n");
+  printf("\t| ID |    Nome    |   Preco   |\n");
+  printf("\t+-----------------------------+\n");
   while (!feof(arquivo)) {
 
     fgets(buffer, 1000, arquivo);
@@ -71,16 +71,14 @@ void interface_cardapio() {
     token = strtok(buffer, ", ");
 
     while (token != NULL) {
-      printf("|\t");
-      printf("%s\t", token);
+      printf("\t| %s  -  ", token);
       token = strtok(NULL, ", ");
-      printf("%s\t", token);
+      printf("%s - ", token);
       token = strtok(NULL, ", ");
-      printf("%s\t", token);
-      printf("\n|");
+      printf("R$%s", token);
       token = strtok(NULL, ", ");
     }
   }
 
-  printf("+-----------+-----------+-----------+-----------+\n");
+  printf("\n\t+-----------------------------+\n");
 }
