@@ -25,5 +25,6 @@ typedef struct Mesa {
 
 void add_cardapio();
 void limpar_buffer();
+void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
 
 #endif // BAMBUCOCO_H

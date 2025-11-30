@@ -38,3 +38,13 @@ void add_cardapio() {
 
   fclose(arquivo);
 }
+
+void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
+  int contador = 1;
+  for (int i = 0; i < MAX_LINHAS; i++) {
+    for (int j = 0; j < MAX_COLUNAS; j++) {
+      r[i][j].id_mesa = contador++;
+      r[i][j].status = 'L';
+    }
+  }
+}

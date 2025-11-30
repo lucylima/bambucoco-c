@@ -7,7 +7,6 @@
 #define COLUNAS 5
 
 void limpar_buffer();
-void bootstrap_restaurante(Mesa r[LINHAS][COLUNAS]);
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]);
 
 int main(void) {
@@ -74,19 +73,24 @@ int main(void) {
 }
 
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]) {
-  int i, j = 0;
-  interface_restaurante(r);
-  printf("Digite a mesa que deseja reservar, ex 0 1\n>>> ");
-  scanf("%d %d", &i, &j);
-  r[i][j].status = 'O';
-}
+  int input = -1;
+  int encontrado = -1;
 
-void bootstrap_restaurante(Mesa r[LINHAS][COLUNAS]) {
-  int contador = 1;
+  interface_restaurante(r);
+
+  printf("Digite a mesa que deseja reservar\n>>> ");
+  scanf("%d", &input);
+
   for (int i = 0; i < LINHAS; i++) {
     for (int j = 0; j < COLUNAS; j++) {
-      r[i][j].id_mesa = contador++;
-      r[i][j].status = 'L';
+      if (r[i][j].id_mesa == input) {
+        if (r[i][j].status == 'L') {
+          r[i][j].status = 'O';
+        } else if (r[i][j].status == 'O') {
+          printf("Mesa já está ocupada! escolha outra\n");
+        }
+      }
     }
   }
 }
+
