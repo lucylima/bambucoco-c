@@ -20,7 +20,7 @@ typedef struct Mesa {
   char status;
   float valor_total;
   Pedido *comanda;
-  int capacidade;
+  char capacidade;
 } Mesa;
 
 void add_cardapio();
