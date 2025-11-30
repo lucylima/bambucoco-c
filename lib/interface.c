@@ -82,4 +82,5 @@ void interface_cardapio() {
   }
 
   printf("\n\t+-----------------------------+\n");
+  fclose(arquivo);
 }
