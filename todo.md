@@ -21,13 +21,13 @@ Esta fase prepara o terreno para o código.
 
 ### 💾 Fase 3: Persistência de Dados (Arquivos)
 
-- [ ] **Criar arquivo `menu.csv`**: Popular manualmente com alguns itens (ex: `1;Moqueca;45.00`).
+- [x] **Criar arquivo `menu.csv`**: Popular manualmente com alguns itens (ex: `1;Moqueca;45.00`).
 - [ ] **Implementar `ler_cardapio()`**: Ler `cardapio.csv`, fazer o *parsing* da string (usando `strtok` ou `fscanf`) e preencher um vetor de structs `ItemMenu`.
 - [ ] **Implementar `salvar_relatorio()`**: Função que recebe os dados de uma conta fechada e escreve (append) em `historico_vendas.txt` com data e hora.
 
 ### 🧠 Fase 4: Lógica de Negócio (Core)
 
-- [ ] **Implementar `inicializar_restaurante()`**: Percorrer a matriz definindo todas as mesas como "Livres" e atribuindo IDs sequenciais.
+- [x] **Implementar `inicializar_restaurante()`**: Percorrer a matriz definindo todas as mesas como "Livres" e atribuindo IDs sequenciais.
 - [ ] **Implementar `buscar_mesa()`**: Função auxiliar para encontrar as coordenadas (i, j) de uma mesa pelo seu ID numérico.
 - [ ] **Implementar `adicionar_pedido()`**:
     - [ ] Verificar se a mesa está aberta.
