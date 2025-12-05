@@ -109,14 +109,18 @@ void reservar_mesa(Mesa r[LINHAS][COLUNAS]) {
         switch (tam) {
         case 'P':
           r[i][j].comanda = malloc(sizeof(Pedido) * 10);
+          r[i][j].tam_comanda = 10;
           break;
         case 'M':
           r[i][j].comanda = malloc(sizeof(Pedido) * 15);
+          r[i][j].tam_comanda = 15;
           break;
         case 'G':
           r[i][j].comanda = malloc(sizeof(Pedido) * 20);
+          r[i][j].tam_comanda = 20;
           break;
         }
+
         r[i][j].status = 'O';
         return;
       }
@@ -125,5 +129,6 @@ void reservar_mesa(Mesa r[LINHAS][COLUNAS]) {
 
   if (!encontrou) {
     printf("ID da mesa inexistente... selecione outro\n");
+    return;
   }
 }
