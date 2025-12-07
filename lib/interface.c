@@ -62,22 +62,22 @@ void interface_cardapio() {
     return;
   }
 
-  printf("\t+-----------------------------+\n");
-  printf("\t| ID |    Nome    |   Preco   |\n");
-  printf("\t+-----------------------------+\n");
+  printf("+-----------------------------+\n");
+  printf("| ID |    Nome    |   Preco   |\n");
+  printf("+-----------------------------+\n");
   while (!feof(arquivo)) {
 
     fgets(buffer, 1000, arquivo);
 
-    token = strtok(buffer, ", ");
+    token = strtok(buffer, "; ");
 
     while (token != NULL) {
-      printf("\t| %s  -  ", token);
-      token = strtok(NULL, ", ");
+      printf("| %s  -  ", token);
+      token = strtok(NULL, ";");
       printf("%s - ", token);
-      token = strtok(NULL, ", ");
+      token = strtok(NULL, ";");
       printf("R$%s", token);
-      token = strtok(NULL, ", ");
+      token = strtok(NULL, ";");
     }
   }
 

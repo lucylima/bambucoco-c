@@ -30,11 +30,11 @@ void add_cardapio() {
   fgets(aux_cardapio.nome, sizeof(aux_cardapio.nome), stdin);
   aux_cardapio.nome[strcspn(aux_cardapio.nome, "\n")] = '\0';
 
-  printf("Digite o valor do item\n>>> ");
+  printf("Digite o valor do item com virgula\n>>> ");
   scanf("%f", &aux_cardapio.preco);
 
-  fprintf(arquivo, "%d, %s, %.2f\n", aux_cardapio.id_cardapio,
-          aux_cardapio.nome, aux_cardapio.preco);
+  fprintf(arquivo, "%d;%s;%.2f\n", aux_cardapio.id_cardapio, aux_cardapio.nome,
+          aux_cardapio.preco);
 
   fclose(arquivo);
 }
