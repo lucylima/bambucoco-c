@@ -8,6 +8,7 @@
 
 void limpar_buffer();
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]);
+void add_pedido();
 
 int main(void) {
   Mesa restaurante[LINHAS][COLUNAS];
@@ -41,6 +42,8 @@ int main(void) {
       break;
 
     case '3':
+      printf("Digite uma opcao:\n");
+      printf("1 - adicionar pedido\n2 - Remover pedido\n");
 
       break;
 
@@ -50,7 +53,8 @@ int main(void) {
 
     case '5':
       limpar_buffer();
-      printf("O que deseja fazer?\n1 - adicionar algo ao cardapio\n2 - remover "
+      printf("O que deseja fazer?\n");
+      printf("1 - adicionar algo ao cardapio\n2 - remover "
              "algo do cardapio\n3 - ver cardapio\n");
       scanf("%c", &op);
 
@@ -76,6 +80,11 @@ int main(void) {
   }
 
   return 0;
+}
+
+void add_pedido() {
+  FILE *arq;
+  Pedido aux_pedido;
 }
 
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]) {
