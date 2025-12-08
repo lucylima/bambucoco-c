@@ -1,4 +1,5 @@
 #include "bambucoco.h"
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -84,24 +85,40 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
           reservar_mesa(r);
         }
 
-        printf("Digite o tamanho da mesa:\n");
-        printf("P: 10 pedidos\n");
-        printf("M: 15 pedidos\n");
-        printf("G: 20 pedidos\n>>> ");
-        scanf(" %c", &tam);
+        while (1) {
+          printf("Digite o tamanho da mesa:\n");
+          printf("P: 4 assentos\n");
+          printf("M: 8 assentos\n");
+          printf("G: 12 assentos\n>>> ");
+          scanf(" %c", &tam);
+
+          tam = toupper(tam);
+
+          if (tam != 'G' && tam != 'M' && tam != 'P') {
+            printf("tamanho errado! digite uma opção correta\n");
+            continue;
+          }
+
+          break;
+        }
 
         switch (tam) {
         case 'P':
           r[i][j].comanda = malloc(sizeof(Pedido) * 4);
           r[i][j].tam_comanda = 4;
+          printf("Mesa reservada com sucesso\n");
           break;
+
         case 'M':
           r[i][j].comanda = malloc(sizeof(Pedido) * 8);
           r[i][j].tam_comanda = 8;
+          printf("Mesa reservada com sucesso\n");
           break;
+
         case 'G':
           r[i][j].comanda = malloc(sizeof(Pedido) * 12);
           r[i][j].tam_comanda = 12;
+          printf("Mesa reservada com sucesso\n");
           break;
         }
 
