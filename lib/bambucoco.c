@@ -48,3 +48,26 @@ void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     }
   }
 }
+
+void carregar_cardapio(Pedido items[]) {
+  FILE *arquivo;
+  char buffer[200];
+  char *token;
+  int i = 0;
+
+  while (fgets(buffer, sizeof(buffer), arquivo) != NULL) {
+
+    token = strtok(buffer, ";");
+
+    while (token != NULL) {
+      items[i].id_item = atoi(token);
+      token = strtok(NULL, ";");
+
+      strcpy(items[i].nome, token);
+      token = strtok(NULL, ";");
+
+      items[i].preco = atof(token);
+      token = strtok(NULL, ";");
+    }
+  }
+}

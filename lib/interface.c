@@ -52,7 +52,7 @@ void interface_restaurante(Mesa m[MAX_LINHAS][MAX_COLUNAS]) {
 
 void interface_cardapio() {
   FILE *arquivo;
-  char buffer[1000];
+  char buffer[200];
   char *token;
 
   arquivo = fopen("./data/restaurante/cardapio.csv", "r+");
@@ -65,13 +65,19 @@ void interface_cardapio() {
   printf("+-----------------------------+\n");
   printf("| ID |    Nome    |   Preco   |\n");
   printf("+-----------------------------+\n");
-  while (!feof(arquivo)) {
 
-    fgets(buffer, 1000, arquivo);
+  while (fgets(buffer, sizeof(buffer), arquivo) != NULL) {
 
-    token = strtok(buffer, "; ");
+    if (feof(arquivo)) {
+      break;
+    } else if (ferror(arquivo)) {
+      printf("um erro ocorreu ao ler o arquivo\n");
+      return;
+    }
 
-    while (token != NULL) {
+    token = strtok(buffer, ";");
+
+    if (token != NULL) {
       printf("| %s  -  ", token);
       token = strtok(NULL, ";");
       printf("%s - ", token);
@@ -81,6 +87,6 @@ void interface_cardapio() {
     }
   }
 
-  printf("\n\t+-----------------------------+\n");
+  printf("+-----------------------------+\n");
   fclose(arquivo);
 }
