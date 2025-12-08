@@ -1,5 +1,6 @@
 #include "./lib/bambucoco.h"
 #include "./lib/interface.h"
+#include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,11 +9,12 @@
 
 void limpar_buffer();
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]);
-void add_pedido();
 
 int main(void) {
   Mesa restaurante[LINHAS][COLUNAS];
   char op;
+
+  setlocale(LC_ALL, "");
 
   bootstrap_restaurante(restaurante);
 
@@ -42,7 +44,7 @@ int main(void) {
       break;
 
     case '3':
-      printf("Digite uma opcao:\n");
+      printf("Digite uma opção:\n");
       printf("1 - adicionar pedido\n2 - Remover pedido\n");
 
       break;
@@ -80,11 +82,6 @@ int main(void) {
   }
 
   return 0;
-}
-
-void add_pedido() {
-  FILE *arq;
-  Pedido aux_pedido;
 }
 
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]) {

@@ -12,6 +12,8 @@ typedef struct ItemCardapio {
 
 typedef struct Pedido {
   int id_item;
+  char nome[30];
+  float preco;
   int quantidade;
 } Pedido;
 
