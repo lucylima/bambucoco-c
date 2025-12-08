@@ -28,14 +28,14 @@ Esta fase prepara o terreno para o código.
 ### 🧠 Fase 4: Lógica de Negócio (Core)
 
 - [x] **Implementar `inicializar_restaurante()`**: Percorrer a matriz definindo todas as mesas como "Livres" e atribuindo IDs sequenciais.
-- [ ] **Implementar `buscar_mesa()`**: Função auxiliar para encontrar as coordenadas (i, j) de uma mesa pelo seu ID numérico.
+- [x] **Implementar `buscar_mesa()`**: Função auxiliar para encontrar as coordenadas (i, j) de uma mesa pelo seu ID numérico.
 - [ ] **Implementar `adicionar_pedido()`**:
     - [ ] Verificar se a mesa está aberta.
     - [ ] Buscar item no menu pelo ID.
     - [ ] Adicionar ao vetor de pedidos da struct `Mesa`.
     - [ ] Atualizar o subtotal da mesa.
 - [ ] **Implementar `fechar_conta()`**: Somar tudo, exibir o total, salvar no relatório e limpar a struct da mesa (resetar para "Livre").
-- [ ] **Implementar `reservar_mesa()`**: Reservar a mesa, checar se está livre e perguntar qual o tamanho da mesa.
+- [x] **Implementar `reservar_mesa()`**: Reservar a mesa, checar se está livre e perguntar qual o tamanho da mesa.
 
 ### 🖥️ Fase 5: Interface e Navegação
 
