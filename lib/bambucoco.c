@@ -49,25 +49,65 @@ void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
   }
 }
 
-void carregar_cardapio(Pedido items[]) {
-  FILE *arquivo;
-  char buffer[200];
-  char *token;
-  int i = 0;
+void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
+  int result, input = 0;
+  char tam;
 
-  while (fgets(buffer, sizeof(buffer), arquivo) != NULL) {
+  while (1) {
+    printf("Digite a mesa que deseja reservar\n>>> ");
+    result = scanf("%d", &input);
 
-    token = strtok(buffer, ";");
+    if (result == 1) {
+      if (input < 1 || input > (MAX_COLUNAS * MAX_LINHAS)) {
+        printf("Mesa fora do limite\n");
+        continue;
+      }
+    }
 
-    while (token != NULL) {
-      items[i].id_item = atoi(token);
-      token = strtok(NULL, ";");
+    if (result != 1 || result == EOF) {
+      printf("Por favor, digite um número de 1 a %d\n",
+             MAX_LINHAS * MAX_COLUNAS);
+      limpar_buffer();
+      continue;
+    }
 
-      strcpy(items[i].nome, token);
-      token = strtok(NULL, ";");
+    break;
+  }
 
-      items[i].preco = atof(token);
-      token = strtok(NULL, ";");
+  for (int i = 0; i < MAX_LINHAS; i++) {
+    for (int j = 0; j < MAX_COLUNAS; j++) {
+
+      if (input == r[i][j].id_mesa) {
+
+        if (r[i][j].status == 'O') {
+          printf("mesa ocupada! selecione outra\n");
+          reservar_mesa(r);
+        }
+
+        printf("Digite o tamanho da mesa:\n");
+        printf("P: 10 pedidos\n");
+        printf("M: 15 pedidos\n");
+        printf("G: 20 pedidos\n>>> ");
+        scanf(" %c", &tam);
+
+        switch (tam) {
+        case 'P':
+          r[i][j].comanda = malloc(sizeof(Pedido) * 4);
+          r[i][j].tam_comanda = 4;
+          break;
+        case 'M':
+          r[i][j].comanda = malloc(sizeof(Pedido) * 8);
+          r[i][j].tam_comanda = 8;
+          break;
+        case 'G':
+          r[i][j].comanda = malloc(sizeof(Pedido) * 12);
+          r[i][j].tam_comanda = 12;
+          break;
+        }
+
+        r[i][j].status = 'O';
+        return;
+      }
     }
   }
 }

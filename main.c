@@ -40,6 +40,7 @@ int main(void) {
 
     case '2':
       limpar_buffer();
+      interface_restaurante(restaurante);
       reservar_mesa(restaurante);
       break;
 
@@ -82,59 +83,4 @@ int main(void) {
   }
 
   return 0;
-}
-
-void reservar_mesa(Mesa r[LINHAS][COLUNAS]) {
-  int input = 0;
-  char tam;
-  int encontrou = 0;
-
-  interface_restaurante(r);
-
-  printf("Digite a mesa que deseja reservar\n>>> ");
-  scanf("%d", &input);
-
-  for (int i = 0; i < LINHAS; i++) {
-    for (int j = 0; j < COLUNAS; j++) {
-
-      if (input == r[i][j].id_mesa) {
-
-        encontrou = 1;
-
-        if (r[i][j].status == 'O') {
-          printf("mesa ocupada! selecione outra\n");
-          reservar_mesa(r);
-        }
-
-        printf("Digite o tamanho da mesa:\n");
-        printf("P: 10 pedidos\n");
-        printf("M: 15 pedidos\n");
-        printf("G: 20 pedidos\n>>> ");
-        scanf(" %c", &tam);
-
-        switch (tam) {
-        case 'P':
-          r[i][j].comanda = malloc(sizeof(Pedido) * 10);
-          r[i][j].tam_comanda = 10;
-          break;
-        case 'M':
-          r[i][j].comanda = malloc(sizeof(Pedido) * 15);
-          r[i][j].tam_comanda = 15;
-          break;
-        case 'G':
-          r[i][j].comanda = malloc(sizeof(Pedido) * 20);
-          r[i][j].tam_comanda = 20;
-          break;
-        }
-
-        r[i][j].status = 'O';
-        return;
-      }
-    }
-  }
-
-  if (!encontrou) {
-    printf("ID da mesa inexistente... selecione outro\n");
-    return;
-  }
 }
