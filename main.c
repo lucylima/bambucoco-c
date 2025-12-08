@@ -11,6 +11,7 @@ void limpar_buffer();
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]);
 
 int main(void) {
+  FILE *arquivo;
   Mesa restaurante[LINHAS][COLUNAS];
   char op;
 
@@ -63,7 +64,9 @@ int main(void) {
 
       switch (op) {
       case '1':
-        add_cardapio();
+        arquivo = fopen("./data/restaurante/cardapio.csv", "a+");
+        add_cardapio(arquivo);
+        fclose(arquivo);
         break;
       case '2':
         break;

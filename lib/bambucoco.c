@@ -10,16 +10,12 @@ void limpar_buffer() {
   }
 }
 
-void add_cardapio() {
+void add_cardapio(FILE *arquivo) {
   ItemCardapio aux_cardapio;
-
-  FILE *arquivo;
-
-  arquivo = fopen("./data/restaurante/cardapio.csv", "a+");
 
   if (arquivo == NULL) {
     printf("erro ao abrir arquivo, abortando\n");
-    exit(1);
+    return;
   }
 
   printf("Digite o ID do item\n>>> ");
@@ -36,8 +32,6 @@ void add_cardapio() {
 
   fprintf(arquivo, "%d;%s;%.2f\n", aux_cardapio.id_cardapio, aux_cardapio.nome,
           aux_cardapio.preco);
-
-  fclose(arquivo);
 }
 
 void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
