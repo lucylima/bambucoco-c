@@ -17,7 +17,9 @@ int main(void) {
 
   setlocale(LC_ALL, "");
 
-  bootstrap_restaurante(restaurante);
+  if (!carregar_estado_mesa(restaurante)) {
+    bootstrap_restaurante(restaurante);
+  }
 
   while (1) {
     menu();
@@ -35,6 +37,7 @@ int main(void) {
       if (op == 's' || op == 'S') {
         limpar_buffer();
         reservar_mesa(restaurante);
+        salvar_estado_mesa(restaurante);
       }
 
       break;
@@ -43,6 +46,7 @@ int main(void) {
       limpar_buffer();
       interface_restaurante(restaurante);
       reservar_mesa(restaurante);
+      salvar_estado_mesa(restaurante);
       break;
 
     case '3':
@@ -74,9 +78,11 @@ int main(void) {
         interface_cardapio();
         break;
       }
+
       break;
 
     case '6':
+      salvar_estado_mesa(restaurante);
       exit(0);
       break;
 

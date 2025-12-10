@@ -2,6 +2,7 @@
 #define BAMBUCOCO_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #define MAX_COLUNAS 5
 #define MAX_LINHAS 5
 
@@ -30,5 +31,7 @@ typedef struct Mesa {
 void add_cardapio(FILE *arquivo);
 void limpar_buffer();
 void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
+int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
+int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
 
 #endif // BAMBUCOCO_H

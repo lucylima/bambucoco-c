@@ -1,5 +1,6 @@
 #include "bambucoco.h"
 #include <ctype.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -121,4 +122,40 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
       }
     }
   }
+}
+
+int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
+  FILE *arquivo;
+
+  arquivo = fopen("./data/restaurante/mesa.bin", "rb");
+
+  if (arquivo == NULL) {
+    return 0;
+  }
+
+  size_t result = fread(r, sizeof(Mesa), MAX_LINHAS * MAX_COLUNAS, arquivo);
+
+  fclose(arquivo);
+
+  if (result != MAX_LINHAS * MAX_COLUNAS) {
+    return 1;
+  }
+
+  return 1;
+}
+
+int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
+  FILE *arquivo;
+
+  arquivo = fopen("./data/restaurante/mesa.bin", "wb");
+
+  if (arquivo == NULL) {
+    return 0;
+  }
+
+  size_t result = fwrite(r, sizeof(Mesa), MAX_LINHAS * MAX_COLUNAS, arquivo);
+
+  fclose(arquivo);
+
+  return (result == MAX_LINHAS * MAX_COLUNAS);
 }
