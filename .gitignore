@@ -27,3 +27,5 @@ bin/
 *.user
 *.suo
 *~
+
+./data/restaurante/
