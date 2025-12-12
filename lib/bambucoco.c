@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+void limpar_tela() { printf("\e[1;1H\e[2J"); }
+
 void limpar_buffer() {
   int c;
   while ((c = getchar()) != '\n' && c != EOF) {
@@ -41,6 +43,7 @@ void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     for (int j = 0; j < MAX_COLUNAS; j++) {
       r[i][j].id_mesa = contador++;
       r[i][j].status = 'L';
+      r[i][j].pos_comanda = 0;
     }
   }
 }
@@ -158,4 +161,15 @@ int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
   fclose(arquivo);
 
   return (result == MAX_LINHAS * MAX_COLUNAS);
+}
+
+void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
+                int *coluna) {
+  for (int i = 0; i < MAX_LINHAS; i++)
+    for (int j = 0; j < MAX_COLUNAS; j++) {
+      if (input == r[i][j].id_mesa) {
+        linha = &i;
+        coluna = &j;
+      }
+    }
 }
