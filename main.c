@@ -10,6 +10,7 @@
 void limpar_buffer();
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]);
 void add_pedido(Mesa r[LINHAS][COLUNAS], int input_produto, int input_mesa);
+void pagar_conta(Mesa r[LINHAS][COLUNAS], int input_mesa);
 
 int main(void) {
   FILE *arquivo;
@@ -154,4 +155,19 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
   }
 
   fclose(arquivo);
+}
+
+void pagar_conta(Mesa r[LINHAS][COLUNAS], int input_mesa) {
+  float preco_total;
+  int l, c;
+
+  achar_mesa(r, input_mesa, &l, &c);
+
+  for (int i = 0; i < r[l][c].tam_comanda; i++) {
+    preco_total += (r[l][c].comanda[i].preco * r[l][c].comanda[i].quantidade);
+  }
+
+  r[l][c].status = 'L';
+
+  free(r[l][c].comanda);
 }
