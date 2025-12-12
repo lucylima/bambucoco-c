@@ -31,7 +31,7 @@ int main(void) {
 
     switch (op) {
 
-    case '1':
+    case MENU_VER_RESTAURANTE:
       limpar_buffer();
       interface_restaurante(restaurante);
       printf("Deseja reservar uma mesa? S/n\n>>> ");
@@ -45,14 +45,14 @@ int main(void) {
 
       break;
 
-    case '2':
+    case MENU_RESERVAR_MESA:
       limpar_buffer();
       interface_restaurante(restaurante);
       reservar_mesa(restaurante);
       salvar_estado_mesa(restaurante);
       break;
 
-    case '3':
+    case MENU_GERENCIAR_COMANDA:
       printf("Digite uma opção:\n");
       printf("1 - adicionar pedido\n2 - Remover pedido\n");
       printf("3 - Ver pedidos da minha mesa\n");
@@ -72,11 +72,11 @@ int main(void) {
 
       break;
 
-    case '4':
+    case MENU_PAGAR_CONTA:
 
       break;
 
-    case '5':
+    case MENU_GERENCIAR_CARDAPIO:
       limpar_buffer();
       printf("O que deseja fazer?\n");
       printf("1 - adicionar algo ao cardapio\n2 - remover "
@@ -97,7 +97,7 @@ int main(void) {
       }
       break;
 
-    case '6':
+    case MENU_SAIR:
       salvar_estado_mesa(restaurante);
       exit(0);
       break;
@@ -112,7 +112,6 @@ int main(void) {
 
 void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
                 int input_mesa) {
-
   FILE *arquivo;     // será REMOVIDO
   char linha[200];   // buffer
   Pedido aux_pedido; // struct que vai guardar os dados do pedido achado
@@ -134,20 +133,23 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
     sscanf(linha, "%d;%30[^;];%f", &aux_pedido.id_item, aux_pedido.nome,
            &aux_pedido.preco);
 
-    *pos = r[l][c].pos_comanda;
+    if (input_produto == aux_pedido.id_item) {
 
-    if (r[l][c].status == 'O' && *pos < r[l][c].tam_comanda) {
+      *pos = r[l][c].pos_comanda;
 
-      strcpy(r[l][c].comanda[*pos].nome, aux_pedido.nome);
+      if (r[l][c].status == 'O' && *pos < r[l][c].tam_comanda) {
 
-      r[l][c].comanda[*pos].preco = aux_pedido.preco;
+        strcpy(r[l][c].comanda[*pos].nome, aux_pedido.nome);
 
-      printf("id da mesa: %d\nstatus da mesa: Ocupada\nnome do primeiro "
-             "pedido: %s\npreço do primeiro pedido: %.2f\nposicao: %d\n",
-             r[l][c].id_mesa, r[l][c].comanda[r[l][c].pos_comanda].nome,
-             r[l][c].comanda[r[l][c].pos_comanda].preco, r[l][c].pos_comanda);
+        r[l][c].comanda[*pos].preco = aux_pedido.preco;
 
-      *pos = *pos + 1;
+        printf("id da mesa: %d\nstatus da mesa: Ocupada\nnome do primeiro "
+               "pedido: %s\npreço do primeiro pedido: %.2f\nposicao: %d\n",
+               r[l][c].id_mesa, r[l][c].comanda[r[l][c].pos_comanda].nome,
+               r[l][c].comanda[r[l][c].pos_comanda].preco, r[l][c].pos_comanda);
+
+        *pos = *pos + 1;
+      }
     }
   }
 
