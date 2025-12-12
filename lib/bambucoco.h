@@ -29,6 +29,15 @@ typedef struct Mesa {
   int pos_comanda;
 } Mesa;
 
+enum Menu {
+  MENU_VER_RESTAURANTE,
+  MENU_RESERVAR_MESA,
+  MENU_GERENCIAR_COMANDA,
+  MENU_PAGAR_CONTA,
+  MENU_GERENCIAR_CARDAPIO,
+  MENU_SAIR
+};
+
 void add_cardapio(FILE *arquivo);
 void limpar_buffer();
 void limpar_tela();
