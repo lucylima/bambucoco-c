@@ -90,3 +90,26 @@ void interface_cardapio() {
   printf("+-----------------------------+\n");
   fclose(arquivo);
 }
+
+void interface_imprimir_comanda(Mesa r[MAX_LINHAS][MAX_COLUNAS],
+                                int input_mesa) {
+  int l, c = 0;
+
+  achar_mesa(r, input_mesa, &l, &c);
+
+  if (r[l][c].pos_comanda < 1) {
+    printf("Sem produtos na comanda\n");
+    return;
+  }
+
+  printf("+------------------------------------------+\n");
+  printf("| ID |    Nome    |   Preco   | Quantidade |\n");
+  printf("+------------------------------------------+\n");
+
+  for (int i = 0; i < r[l][c].pos_comanda; i++) {
+    printf("%d  -  %s  -  %.2f  -  %d", r[l][c].comanda[i].id_item,
+           r[l][c].comanda[i].nome, r[l][c].comanda[i].preco,
+           r[l][c].comanda[i].quantidade);
+  }
+  printf("+------------------------------------------+\n");
+}
