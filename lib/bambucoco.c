@@ -121,8 +121,7 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
   return;
 }
 
-int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
-  FILE *arquivo;
+int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], FILE *arquivo) {
 
   arquivo = fopen("./data/restaurante/mesa.bin", "rb");
 
@@ -141,8 +140,7 @@ int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
   return 1;
 }
 
-int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
-  FILE *arquivo;
+int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], FILE *arquivo) {
 
   arquivo = fopen("./data/restaurante/mesa.bin", "wb");
 
@@ -214,7 +212,8 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
   fclose(arquivo);
 }
 
-void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa) {
+void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
+                 FILE *arquivo) {
   int l, c;
 
   achar_mesa(r, input_mesa, &l, &c);
@@ -226,7 +225,7 @@ void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa) {
 
   r[l][c].status = 'L';
 
-  salvar_historico(r[l][c]);
+  salvar_historico(r[l][c], arquivo);
 
   free(r[l][c].comanda);
 }

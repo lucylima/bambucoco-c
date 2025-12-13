@@ -16,7 +16,7 @@ int main(void) {
 
   setlocale(LC_ALL, "");
 
-  if (!carregar_estado_mesa(restaurante)) {
+  if (!carregar_estado_mesa(restaurante, arquivo)) {
     bootstrap_restaurante(restaurante);
   }
 
@@ -38,7 +38,7 @@ int main(void) {
       if (op == 's' || op == 'S') {
         limpar_buffer();
         reservar_mesa(restaurante);
-        salvar_estado_mesa(restaurante);
+        salvar_estado_mesa(restaurante, arquivo);
       }
 
       break;
@@ -48,7 +48,7 @@ int main(void) {
       limpar_buffer();
       interface_restaurante(restaurante);
       reservar_mesa(restaurante);
-      salvar_estado_mesa(restaurante);
+      salvar_estado_mesa(restaurante, arquivo);
       break;
 
     case MENU_GERENCIAR_COMANDA:
@@ -105,7 +105,7 @@ int main(void) {
       break;
 
     case MENU_SAIR:
-      salvar_estado_mesa(restaurante);
+      salvar_estado_mesa(restaurante, arquivo);
       exit(0);
       break;
 

@@ -50,8 +50,8 @@ void add_cardapio(FILE *arquivo);
 void limpar_buffer();
 void limpar_tela();
 void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
-int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
-int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
+int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], FILE *arquivo);
+int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], FILE *arquivo);
 void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
                 int *coluna);
 void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
