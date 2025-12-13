@@ -37,7 +37,7 @@ int main(void) {
       if (op == 's' || op == 'S') {
         limpar_buffer();
         reservar_mesa(restaurante);
-        salvar_estado_mesa(restaurante, arquivo);
+        salvar_estado_mesa(restaurante);
       }
 
       break;
@@ -47,7 +47,7 @@ int main(void) {
       limpar_buffer();
       interface_restaurante(restaurante);
       reservar_mesa(restaurante);
-      salvar_estado_mesa(restaurante, arquivo);
+      salvar_estado_mesa(restaurante);
       break;
 
     case MENU_GERENCIAR_COMANDA:
@@ -104,7 +104,7 @@ int main(void) {
       break;
 
     case MENU_SAIR:
-      salvar_estado_mesa(restaurante, arquivo);
+      salvar_estado_mesa(restaurante);
       exit(0);
       break;
 
