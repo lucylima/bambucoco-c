@@ -168,7 +168,8 @@ void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
 
 void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
                 int input_mesa) {
-  FILE *arquivo;     // será REMOVIDO
+  FILE *arquivo;
+
   char linha[200];   // buffer
   Pedido aux_pedido; // struct que vai guardar os dados do pedido achado
 
@@ -212,8 +213,8 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
   fclose(arquivo);
 }
 
-void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
-                 FILE *arquivo) {
+void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa, ) {
+  FILE *arquivo;
   int l, c;
 
   achar_mesa(r, input_mesa, &l, &c);

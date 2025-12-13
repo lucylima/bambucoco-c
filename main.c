@@ -11,12 +11,11 @@ int main(void) {
   FILE *arquivo;
   Mesa restaurante[LINHAS][COLUNAS];
   char op;
-
   int input_produto, input_mesa = 0;
 
   setlocale(LC_ALL, "");
 
-  if (!carregar_estado_mesa(restaurante, arquivo)) {
+  if (!carregar_estado_mesa(restaurante)) {
     bootstrap_restaurante(restaurante);
   }
 
