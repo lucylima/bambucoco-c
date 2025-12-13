@@ -6,8 +6,6 @@
 #include <string.h>
 #include <time.h>
 
-void limpar_tela() { printf("\e[1;1H\e[2J"); }
-
 void limpar_buffer() {
   int c;
   while ((c = getchar()) != '\n' && c != EOF) {
@@ -164,8 +162,8 @@ void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
   for (int i = 0; i < MAX_LINHAS; i++)
     for (int j = 0; j < MAX_COLUNAS; j++) {
       if (input == r[i][j].id_mesa) {
-        linha = &i;
-        coluna = &j;
+        *linha = i;
+        *coluna = j;
       }
     }
 }
@@ -217,7 +215,6 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
 }
 
 void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa) {
-  float preco_total;
   int l, c;
 
   achar_mesa(r, input_mesa, &l, &c);
