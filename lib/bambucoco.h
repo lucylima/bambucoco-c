@@ -22,6 +22,7 @@ typedef struct Pedido {
 typedef struct Mesa {
   int id_mesa;
   char status;
+  char nome[30];
   float valor_total;
   Pedido *comanda;
   char capacidade;

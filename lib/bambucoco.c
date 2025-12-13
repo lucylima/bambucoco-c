@@ -44,6 +44,7 @@ void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
       r[i][j].id_mesa = contador++;
       r[i][j].status = 'L';
       r[i][j].pos_comanda = 0;
+      r[i][j].valor_total = 0;
     }
   }
 }
