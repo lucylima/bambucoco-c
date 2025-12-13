@@ -1,8 +1,10 @@
 #include "./lib/bambucoco.h"
 #include "./lib/interface.h"
 #include <locale.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define LINHAS 5
 #define COLUNAS 5
@@ -11,6 +13,7 @@ void limpar_buffer();
 void reservar_mesa(Mesa r[LINHAS][COLUNAS]);
 void add_pedido(Mesa r[LINHAS][COLUNAS], int input_produto, int input_mesa);
 void pagar_conta(Mesa r[LINHAS][COLUNAS], int input_mesa);
+void salvar_historico(Mesa r);
 
 int main(void) {
   FILE *arquivo;
@@ -164,10 +167,38 @@ void pagar_conta(Mesa r[LINHAS][COLUNAS], int input_mesa) {
   achar_mesa(r, input_mesa, &l, &c);
 
   for (int i = 0; i < r[l][c].tam_comanda; i++) {
-    preco_total += (r[l][c].comanda[i].preco * r[l][c].comanda[i].quantidade);
+    r[l][c].valor_total +=
+        (r[l][c].comanda[i].preco * r[l][c].comanda[i].quantidade);
   }
 
   r[l][c].status = 'L';
 
+  salvar_historico(r[l][c]);
+
   free(r[l][c].comanda);
+}
+
+void salvar_historico(Mesa r) {
+  FILE *arquivo;
+
+  arquivo = fopen("./data/restaurante/historico.csv", "a+");
+
+  if (arquivo == NULL) {
+    perror("erro ao abrir arquivo\n");
+    exit(1);
+  }
+
+  time_t tempo_atual = time(NULL);
+  struct tm *struct_tempo = localtime(&tempo_atual);
+  char buffer_tempo[100];
+
+  strftime(buffer_tempo, sizeof(buffer_tempo), "%d/%m/%Y - %H:%M",
+           struct_tempo);
+
+  fprintf(arquivo, "id;tamanho;nome;valor_total;data\n");
+
+  fprintf(arquivo, "%d;%d;%s;%.2f;%s\n", r.id_mesa, r.tam_comanda, r.nome,
+          r.valor_total, buffer_tempo);
+
+  fclose(arquivo);
 }
