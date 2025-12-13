@@ -50,7 +50,7 @@ void bootstrap_restaurante(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
 }
 
 void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
-  int result, input = 0;
+  int result, input, l, c = 0;
   char tam;
 
   while (1) {
@@ -74,58 +74,52 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     break;
   }
 
-  for (int i = 0; i < MAX_LINHAS; i++) {
-    for (int j = 0; j < MAX_COLUNAS; j++) {
+  achar_mesa(r, input, &l, &c);
 
-      if (input == r[i][j].id_mesa) {
-
-        if (r[i][j].status == 'O') {
-          printf("mesa ocupada! selecione outra\n");
-          reservar_mesa(r);
-        }
-
-        while (1) {
-          printf("Digite o tamanho da mesa:\n");
-          printf("P: 4 assentos\n");
-          printf("M: 8 assentos\n");
-          printf("G: 12 assentos\n>>> ");
-          scanf(" %c", &tam);
-
-          tam = toupper(tam);
-
-          if (tam != 'G' && tam != 'M' && tam != 'P') {
-            printf("tamanho errado! digite uma opção correta\n");
-            continue;
-          }
-
-          break;
-        }
-
-        switch (tam) {
-        case 'P':
-          r[i][j].comanda = malloc(sizeof(Pedido) * 4);
-          r[i][j].tam_comanda = 4;
-          printf("Mesa reservada com sucesso\n");
-          break;
-
-        case 'M':
-          r[i][j].comanda = malloc(sizeof(Pedido) * 8);
-          r[i][j].tam_comanda = 8;
-          printf("Mesa reservada com sucesso\n");
-          break;
-
-        case 'G':
-          r[i][j].comanda = malloc(sizeof(Pedido) * 12);
-          r[i][j].tam_comanda = 12;
-          printf("Mesa reservada com sucesso\n");
-          break;
-        }
-
-        r[i][j].status = 'O';
-        return;
-      }
-    }
+  if (r[l][c].status == 'O') {
+    printf("mesa ocupada! selecione outra\n");
+    reservar_mesa(r);
   }
+
+  while (1) {
+    printf("Digite o tamanho da mesa:\n");
+    printf("P: 4 assentos\n");
+    printf("M: 8 assentos\n");
+    printf("G: 12 assentos\n>>> ");
+    scanf(" %c", &tam);
+
+    tam = toupper(tam);
+
+    if (tam != 'G' && tam != 'M' && tam != 'P') {
+      printf("tamanho errado! digite uma opção correta\n");
+      continue;
+    }
+
+    break;
+  }
+
+  switch (tam) {
+  case 'P':
+    r[l][c].comanda = malloc(sizeof(Pedido) * 4);
+    r[l][c].tam_comanda = 4;
+    printf("Mesa reservada com sucesso\n");
+    break;
+
+  case 'M':
+    r[l][c].comanda = malloc(sizeof(Pedido) * 8);
+    r[l][c].tam_comanda = 8;
+    printf("Mesa reservada com sucesso\n");
+    break;
+
+  case 'G':
+    r[l][c].comanda = malloc(sizeof(Pedido) * 12);
+    r[l][c].tam_comanda = 12;
+    printf("Mesa reservada com sucesso\n");
+    break;
+  }
+
+  r[l][c].status = 'O';
+  return;
 }
 
 int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
