@@ -113,3 +113,5 @@ void interface_imprimir_comanda(Mesa r[MAX_LINHAS][MAX_COLUNAS],
   }
   printf("+------------------------------------------+\n");
 }
+
+void limpar_tela() { printf("\e[1;1H\e[2J"); }
