@@ -80,7 +80,7 @@ int main(void) {
     case MENU_PAGAR_CONTA:
       printf("Digite o id da mesa: ");
       scanf("%d", &input_mesa);
-      pagar_conta(restaurante, input_mesa);
+      pagar_conta(restaurante, input_mesa, arquivo);
       break;
 
     case MENU_GERENCIAR_CARDAPIO:

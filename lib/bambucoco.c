@@ -231,8 +231,7 @@ void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa) {
   free(r[l][c].comanda);
 }
 
-void salvar_historico(Mesa r) {
-  FILE *arquivo;
+void salvar_historico(Mesa r, FILE *arquivo) {
 
   arquivo = fopen("./data/restaurante/historico.csv", "a+");
 
