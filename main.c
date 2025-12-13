@@ -21,6 +21,7 @@ int main(void) {
   }
 
   while (1) {
+    limpar_tela();
     menu();
     printf(">>> ");
     scanf(" %c", &op);
@@ -28,6 +29,7 @@ int main(void) {
     switch (op) {
 
     case MENU_VER_RESTAURANTE:
+      limpar_tela();
       limpar_buffer();
       interface_restaurante(restaurante);
       printf("Deseja reservar uma mesa? S/n\n>>> ");
@@ -42,6 +44,7 @@ int main(void) {
       break;
 
     case MENU_RESERVAR_MESA:
+      limpar_tela();
       limpar_buffer();
       interface_restaurante(restaurante);
       reservar_mesa(restaurante);
