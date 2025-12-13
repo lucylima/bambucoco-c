@@ -14,6 +14,7 @@ void reservar_mesa(Mesa r[LINHAS][COLUNAS]);
 void add_pedido(Mesa r[LINHAS][COLUNAS], int input_produto, int input_mesa);
 void pagar_conta(Mesa r[LINHAS][COLUNAS], int input_mesa);
 void salvar_historico(Mesa r);
+void imprimir_comanda(Mesa r[LINHAS][COLUNAS], int input_mesa);
 
 int main(void) {
   FILE *arquivo;
@@ -71,6 +72,12 @@ int main(void) {
         scanf("%d", &input_mesa);
 
         add_pedido(restaurante, input_produto, input_mesa);
+        break;
+
+      case '3':
+        printf("Digite o id da mesa: ");
+        scanf("%d", &input_mesa);
+        imprimir_comanda(restaurante, input_mesa);
         break;
       }
 
@@ -201,4 +208,26 @@ void salvar_historico(Mesa r) {
           r.valor_total, buffer_tempo);
 
   fclose(arquivo);
+}
+
+void imprimir_comanda(Mesa r[LINHAS][COLUNAS], int input_mesa) {
+  int l, c = 0;
+
+  achar_mesa(r, input_mesa, &l, &c);
+
+  if (r[l][c].pos_comanda < 1) {
+    printf("Sem produtos na comanda\n");
+    return;
+  }
+
+  printf("+------------------------------------------+\n");
+  printf("| ID |    Nome    |   Preco   | Quantidade |\n");
+  printf("+------------------------------------------+\n");
+
+  for (int i = 0; i < r[l][c].pos_comanda; i++) {
+    printf("%d  -  %s  -  %.2f  -  %d", r[l][c].comanda[i].id_item,
+           r[l][c].comanda[i].nome, r[l][c].comanda[i].preco,
+           r[l][c].comanda[i].quantidade);
+  }
+  printf("+------------------------------------------+\n");
 }
