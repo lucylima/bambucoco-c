@@ -38,13 +38,13 @@ enum Menu {
   MENU_GERENCIAR_CARDAPIO,
   MENU_SAIR
 };
+
 void limpar_buffer();
 void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
 void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
                 int input_mesa);
 void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa);
 void salvar_historico(Mesa r);
-
 void add_cardapio(FILE *arquivo);
 void limpar_buffer();
 void limpar_tela();
@@ -55,4 +55,5 @@ void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
                 int *coluna);
 void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
                 int input_mesa);
+
 #endif // BAMBUCOCO_H
