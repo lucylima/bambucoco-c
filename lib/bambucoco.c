@@ -16,8 +16,8 @@ void add_cardapio(FILE *arquivo) {
   ItemCardapio aux_cardapio;
 
   if (arquivo == NULL) {
-    printf("erro ao abrir arquivo, abortando\n");
-    return;
+    perror("erro ao abrir arquivo, abortando\n");
+    exit(EXIT_FAILURE);
   }
 
   printf("Digite o ID do item\n>>> ");
@@ -121,12 +121,14 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
   return;
 }
 
-int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], FILE *arquivo) {
+int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
+  FILE *arquivo;
 
   arquivo = fopen("./data/restaurante/mesa.bin", "rb");
 
   if (arquivo == NULL) {
-    return 0;
+    perror("Erro ao abrir o arquivo\n");
+    exit(EXIT_FAILURE);
   }
 
   size_t result = fread(r, sizeof(Mesa), MAX_LINHAS * MAX_COLUNAS, arquivo);
@@ -134,18 +136,20 @@ int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], FILE *arquivo) {
   fclose(arquivo);
 
   if (result != MAX_LINHAS * MAX_COLUNAS) {
-    return 1;
+    return 0;
   }
 
   return 1;
 }
 
-int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], FILE *arquivo) {
+int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
+  FILE *arquivo;
 
   arquivo = fopen("./data/restaurante/mesa.bin", "wb");
 
   if (arquivo == NULL) {
-    return 0;
+    perror("Erro ao abrir arquivo\n");
+    exit(EXIT_FAILURE);
   }
 
   size_t result = fwrite(r, sizeof(Mesa), MAX_LINHAS * MAX_COLUNAS, arquivo);
@@ -179,8 +183,8 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
   arquivo = fopen("./data/restaurante/cardapio.csv", "r");
 
   if (arquivo == NULL) {
-    fclose(arquivo);
-    return;
+    perror("Erro ao abrir arquivo\n");
+    exit(EXIT_FAILURE);
   }
 
   achar_mesa(r, input_mesa, &l, &c);
@@ -213,8 +217,8 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
   fclose(arquivo);
 }
 
-void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa, ) {
-  FILE *arquivo;
+void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
+                 FILE *arquivo) {
   int l, c;
 
   achar_mesa(r, input_mesa, &l, &c);
@@ -237,7 +241,7 @@ void salvar_historico(Mesa r, FILE *arquivo) {
 
   if (arquivo == NULL) {
     perror("erro ao abrir arquivo\n");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   time_t tempo_atual = time(NULL);
