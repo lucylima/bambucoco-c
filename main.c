@@ -20,7 +20,6 @@ int main(void) {
   }
 
   while (1) {
-    limpar_tela();
     menu();
     printf(">>> ");
     scanf(" %c", &op);
@@ -59,6 +58,7 @@ int main(void) {
 
       switch (op) {
       case '1':
+        interface_cardapio();
         printf("Digite o id do produto: ");
         scanf("%d", &input_produto);
         printf("Digite o id da mesa: ");
