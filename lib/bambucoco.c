@@ -173,12 +173,10 @@ void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
 void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
                 int input_mesa) {
   FILE *arquivo;
-
-  char linha[200];   // buffer
-  Pedido aux_pedido; // struct que vai guardar os dados do pedido achado
-
-  int *pos = NULL; // ponteiro da posição disponivel no vetor
-  int l, c;        // linha e coluna da mesa correta, evita usar for
+  char linha[200];
+  Pedido aux_pedido; 
+  int pos;
+  int l, c;        
 
   arquivo = fopen("./data/restaurante/cardapio.csv", "r");
 
@@ -196,20 +194,20 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
 
     if (input_produto == aux_pedido.id_item) {
 
-      *pos = r[l][c].pos_comanda;
+      pos = r[l][c].pos_comanda;
 
-      if (r[l][c].status == 'O' && *pos < r[l][c].tam_comanda) {
+      if (r[l][c].status == 'O' && pos < r[l][c].tam_comanda) {
 
-        strcpy(r[l][c].comanda[*pos].nome, aux_pedido.nome);
+        strcpy(r[l][c].comanda[pos].nome, aux_pedido.nome);
 
-        r[l][c].comanda[*pos].preco = aux_pedido.preco;
+        r[l][c].comanda[pos].preco = aux_pedido.preco;
 
         printf("id da mesa: %d\nstatus da mesa: Ocupada\nnome do primeiro "
                "pedido: %s\npreço do primeiro pedido: %.2f\nposicao: %d\n",
                r[l][c].id_mesa, r[l][c].comanda[r[l][c].pos_comanda].nome,
                r[l][c].comanda[r[l][c].pos_comanda].preco, r[l][c].pos_comanda);
 
-        *pos = *pos + 1;
+      r[l][c].pos_comanda++;
       }
     }
   }
