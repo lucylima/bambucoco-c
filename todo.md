@@ -23,7 +23,7 @@ Esta fase prepara o terreno para o código.
 
 - [x] **Criar arquivo `menu.csv`**: Popular manualmente com alguns itens (ex: `1;Moqueca;45.00`).
 - [x] **Implementar `ler_cardapio()`**: Ler `cardapio.csv`, fazer o *parsing* da string (usando `strtok` ou `fscanf`) e preencher um vetor de structs `ItemMenu`.
-- [ ] **Implementar `salvar_relatorio()`**: Função que recebe os dados de uma conta fechada e escreve (append) em `historico_vendas.txt` com data e hora.
+- [x] **Implementar `salvar_relatorio()`**: Função que recebe os dados de uma conta fechada e escreve (append) em `historico_vendas.txt` com data e hora.
 - [x] **Implementar** lógica de estado das mesas.
 
 ### 🧠 Fase 4: Lógica de Negócio (Core)
@@ -35,7 +35,7 @@ Esta fase prepara o terreno para o código.
     - [x] Buscar item no menu pelo ID.
     - [x] Adicionar ao vetor de pedidos da struct `Mesa`.
     - [ ] Atualizar o subtotal da mesa.
-- [ ] **Implementar `fechar_conta()`**: Somar tudo, exibir o total, salvar no relatório e limpar a struct da mesa (resetar para "Livre").
+- [x] **Implementar `fechar_conta()`**: Somar tudo, exibir o total, salvar no relatório e limpar a struct da mesa (resetar para "Livre").
 - [x] **Implementar `reservar_mesa()`**: Reservar a mesa, checar se está livre e perguntar qual o tamanho da mesa.
 
 ### 🖥️ Fase 5: Interface e Navegação
