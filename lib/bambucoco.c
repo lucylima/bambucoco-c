@@ -116,7 +116,8 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     printf("Mesa reservada com sucesso\n");
     break;
   }
-
+  
+  r[l][c].pos_comanda = 0;
   r[l][c].status = 'O';
   return;
 }
@@ -128,7 +129,7 @@ int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
 
   if (arquivo == NULL) {
     perror("Erro ao abrir o arquivo\n");
-    exit(EXIT_FAILURE);
+    return 0;
   }
 
   size_t result = fread(r, sizeof(Mesa), MAX_LINHAS * MAX_COLUNAS, arquivo);
@@ -186,6 +187,16 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
   }
 
   achar_mesa(r, input_mesa, &l, &c);
+  
+  if(r[l][c].comanda == NULL){
+
+      r[l][c].comanda =(Pedido *)calloc(r[l][c].tam_comanda, sizeof(Pedido));
+
+      if (r[l][c].comanda == NULL){
+          perror("Erro ao alocar memoria para a comanda\n");
+          exit(EXIT_FAILURE);
+      }
+  }
 
   while (fgets(linha, sizeof(linha), arquivo)) {
 
@@ -197,6 +208,9 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
       pos = r[l][c].pos_comanda;
 
       if (r[l][c].status == 'O' && pos < r[l][c].tam_comanda) {
+
+        printf("DEBUG: Linha=%d, Coluna=%d, Posicao=%d, Max=%d\n", 
+       l, c, pos, r[l][c].tam_comanda);
 
         strcpy(r[l][c].comanda[pos].nome, aux_pedido.nome);
 
