@@ -79,6 +79,10 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     printf("mesa ocupada! selecione outra\n");
     reservar_mesa(r);
   }
+  
+  printf("Digite o nome do responsável pela mesa:\n>>> ");
+  fgets(r[l][c].nome, sizeof(r[l][c].nome), stdin);
+  r[l][c].nome[strcspn(r[l][c].nome, "\n")] = '\0';
 
   while (1) {
     printf("Digite o tamanho da mesa:\n");
@@ -191,6 +195,7 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
   if(r[l][c].comanda == NULL){
 
       r[l][c].comanda =(Pedido *)calloc(r[l][c].tam_comanda, sizeof(Pedido));
+      r[l][c].pos_comanda = 0;
 
       if (r[l][c].comanda == NULL){
           perror("Erro ao alocar memoria para a comanda\n");
