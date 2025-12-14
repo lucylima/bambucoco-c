@@ -214,18 +214,12 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
 
       if (r[l][c].status == 'O' && pos < r[l][c].tam_comanda) {
 
-        printf("DEBUG: Linha=%d, Coluna=%d, Posicao=%d, Max=%d\n", 
        l, c, pos, r[l][c].tam_comanda);
 
         strcpy(r[l][c].comanda[pos].nome, aux_pedido.nome);
 
         r[l][c].comanda[pos].preco = aux_pedido.preco;
-
-        printf("id da mesa: %d\nstatus da mesa: Ocupada\nnome do primeiro "
-               "pedido: %s\npreço do primeiro pedido: %.2f\nposicao: %d\n",
-               r[l][c].id_mesa, r[l][c].comanda[r[l][c].pos_comanda].nome,
-               r[l][c].comanda[r[l][c].pos_comanda].preco, r[l][c].pos_comanda);
-
+        
       r[l][c].pos_comanda++;
       }
     }
@@ -265,7 +259,7 @@ void salvar_historico(Mesa r, FILE *arquivo) {
   struct tm *struct_tempo = localtime(&tempo_atual);
   char buffer_tempo[100];
 
-  strftime(buffer_tempo, sizeof(buffer_tempo), "%d/%m/%Y - %H:%M",
+  strftime(buffer_tempo, sizeof(buffer_tempo), "%d/%m/%Y %H:%M",
            struct_tempo);
 
   fprintf(arquivo, "id;tamanho;nome;valor_total;data\n");

@@ -107,7 +107,7 @@ void interface_imprimir_comanda(Mesa r[MAX_LINHAS][MAX_COLUNAS],
   printf("+------------------------------------------+\n");
 
   for (int i = 0; i < r[l][c].pos_comanda; i++) {
-    printf("%d  -  %s  -  %.2f  -  %d\n", r[l][c].comanda[i].id_item,
+    printf("| %d  -  %s  -  %.2f  -  %d\n", r[l][c].comanda[i].id_item,
            r[l][c].comanda[i].nome, r[l][c].comanda[i].preco,
            r[l][c].comanda[i].quantidade);
   }
