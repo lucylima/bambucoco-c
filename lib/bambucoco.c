@@ -139,20 +139,26 @@ int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
 
   for (int i = 0; i < MAX_LINHAS; i++) {
     for (int j = 0; j < MAX_COLUNAS; j++) {
-      fread(&r[i][j], sizeof(Mesa), 1, arquivo);
 
+      fread(&r[i][j], sizeof(Mesa), 1, arquivo);
+      
       r[i][j].comanda = NULL;
 
       if (r[i][j].tam_comanda > 0) {
+
         r[i][j].comanda = (Pedido *)calloc(sizeof(Pedido), r[i][j].tam_comanda);
+
         if (r[i][j].comanda == NULL) {
           perror("Erro ao alocar memória\n");
           exit(EXIT_FAILURE);
         }
+
         fread(r[i][j].comanda, sizeof(Pedido), r[i][j].tam_comanda, arquivo);
       }
     }
   }
+  
+  fclose(arquivo);
 
   return 1;
 }
@@ -169,9 +175,11 @@ int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
 
   for (int i = 0; i < MAX_LINHAS; i++) {
     for (int j = 0; j < MAX_COLUNAS; j++) {
+
       fwrite(&r[i][j], sizeof(Mesa), 1, arquivo);
+
       if (r[i][j].tam_comanda > 0 && r[i][j].comanda != NULL) {
-        fwrite(r[i][j].comanda, sizeof(Pedido), r[i][j].tam_comanda, arquivo);
+        fwrite(&r[i][j].comanda, sizeof(Pedido), r[i][j].tam_comanda, arquivo);
       }
     }
   }
@@ -250,6 +258,12 @@ void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
   
   if( r[l][c].status == 'L') {
     printf("Mesa já está livre! Só paga conta de mesa ocupada.\n");
+    return;
+  }
+  
+  if (r[l][c].pos_comanda <= 0)
+  {
+    printf("Mesa sem pedidos! Não há nada para pagar.\n");
     return;
   }
 

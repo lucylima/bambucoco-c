@@ -12,6 +12,7 @@ int main(void) {
   Mesa restaurante[LINHAS][COLUNAS];
   char op;
   int input_produto, input_mesa = 0;
+  int input_quantidade = 0;
 
   setlocale(LC_ALL, "");
 
@@ -36,7 +37,6 @@ int main(void) {
       if (op == 's' || op == 'S') {
         limpar_buffer();
         reservar_mesa(restaurante);
-        salvar_estado_mesa(restaurante);
       }
 
       break;
@@ -59,18 +59,16 @@ int main(void) {
 
       switch (op) {
       case '1':
-        int quantidade = 0;
-
         limpar_tela();
         interface_cardapio();
         printf("Digite o id do produto: ");
         scanf("%d", &input_produto);
         printf("Digite a quantidade do produto: ");
-        scanf("%d", &quantidade);
+        scanf("%d", &input_quantidade);
         printf("Digite o id da mesa: ");
         scanf("%d", &input_mesa);
 
-        add_pedido(restaurante, input_produto, input_mesa, quantidade);
+        add_pedido(restaurante, input_produto, input_mesa, input_quantidade);
         break;
 
       case '3':
