@@ -134,16 +134,24 @@ int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
   arquivo = fopen("./data/restaurante/mesa.bin", "rb");
 
   if (arquivo == NULL) {
-    perror("Erro ao abrir o arquivo\n");
     return 0;
   }
 
-  size_t result = fread(r, sizeof(Mesa), MAX_LINHAS * MAX_COLUNAS, arquivo);
+  for (int i = 0; i < MAX_LINHAS; i++) {
+    for (int j = 0; j < MAX_COLUNAS; j++) {
+      fread(&r[i][j], sizeof(Mesa), 1, arquivo);
 
-  fclose(arquivo);
+      r[i][j].comanda = NULL;
 
-  if (result != MAX_LINHAS * MAX_COLUNAS) {
-    return 0;
+      if (r[i][j].tam_comanda > 0) {
+        r[i][j].comanda = (Pedido *)calloc(sizeof(Pedido), r[i][j].tam_comanda);
+        if (r[i][j].comanda == NULL) {
+          perror("Erro ao alocar memória\n");
+          exit(EXIT_FAILURE);
+        }
+        fread(r[i][j].comanda, sizeof(Pedido), r[i][j].tam_comanda, arquivo);
+      }
+    }
   }
 
   return 1;
@@ -159,11 +167,17 @@ int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     exit(EXIT_FAILURE);
   }
 
-  size_t result = fwrite(r, sizeof(Mesa), MAX_LINHAS * MAX_COLUNAS, arquivo);
+  for (int i = 0; i < MAX_LINHAS; i++) {
+    for (int j = 0; j < MAX_COLUNAS; j++) {
+      fwrite(&r[i][j], sizeof(Mesa), 1, arquivo);
+      if (r[i][j].tam_comanda > 0 && r[i][j].comanda != NULL) {
+        fwrite(r[i][j].comanda, sizeof(Pedido), r[i][j].tam_comanda, arquivo);
+      }
+    }
+  }
 
   fclose(arquivo);
-
-  return (result == MAX_LINHAS * MAX_COLUNAS);
+  return 1;
 }
 
 void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
@@ -216,7 +230,7 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
       r[l][c].comanda[pos].id_item = aux_pedido.id_item;
 
       strcpy(r[l][c].comanda[pos].nome, aux_pedido.nome);
-      
+
       r[l][c].comanda[pos].quantidade = quantidade;
 
       r[l][c].comanda[pos].preco = aux_pedido.preco;
