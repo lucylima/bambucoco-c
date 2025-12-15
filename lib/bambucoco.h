@@ -54,5 +54,7 @@ int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
 int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
 void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
                 int *coluna);
+void remover_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
+                     int input_produto);
 
 #endif // BAMBUCOCO_H

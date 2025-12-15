@@ -301,3 +301,18 @@ void salvar_historico(Mesa r, FILE *arquivo) {
 
   fclose(arquivo);
 }
+
+void remover_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
+                     int input_produto){
+  int l, c = 0;
+
+  achar_mesa(r, input_mesa, &l, &c);
+
+  if (r[l][c].pos_comanda < 1) {
+    printf("Sem produtos na comanda\n");
+    return;
+  }
+  
+  r[l][c].comanda[input_produto].id_item = -1;
+  printf("Pedido removido com sucesso\n");
+}

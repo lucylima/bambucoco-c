@@ -115,3 +115,28 @@ void interface_imprimir_comanda(Mesa r[MAX_LINHAS][MAX_COLUNAS],
 }
 
 void limpar_tela() { printf("\e[1;1H\e[2J"); }
+
+void interface_imprimir_comanda_id(Mesa r[MAX_LINHAS][MAX_COLUNAS],
+                                int input_mesa) {
+  int l, c = 0;
+
+  achar_mesa(r, input_mesa, &l, &c);
+
+  if (r[l][c].pos_comanda < 1) {
+    printf("Sem produtos na comanda\n");
+    return;
+  }
+
+  printf("+--------------------------------------------+\n");
+  printf("| posicao |   Nome   |  Preco  |  Quantidade |\n");
+  printf("+--------------------------------------------+\n");
+
+  for (int i = 0; i < r[l][c].pos_comanda; i++) {
+    printf("| %d  -  %s  -  %.2f  -  %d\n", i,
+           r[l][c].comanda[i].nome, r[l][c].comanda[i].preco,
+           r[l][c].comanda[i].quantidade);
+  }
+  printf("+------------------------------------------+\n");
+  printf("+ -1 significa que o produto foi removido  +\n");
+  printf("+------------------------------------------+\n");
+}
