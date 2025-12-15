@@ -59,6 +59,7 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     if (result == 1) {
       if (input < 1 || input > (MAX_COLUNAS * MAX_LINHAS)) {
         printf("Mesa fora do limite\n");
+        limpar_buffer();
         continue;
       }
     }
@@ -80,6 +81,7 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     reservar_mesa(r);
   }
 
+  limpar_buffer();
   printf("Digite o nome do responsável pela mesa:\n>>> ");
   fgets(r[l][c].nome, sizeof(r[l][c].nome), stdin);
   r[l][c].nome[strcspn(r[l][c].nome, "\n")] = '\0';
@@ -103,19 +105,19 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
 
   switch (tam) {
   case 'P':
-    r[l][c].comanda = malloc(sizeof(Pedido) * 4);
+    r[l][c].comanda = calloc(sizeof(Pedido), 4);
     r[l][c].tam_comanda = 4;
     printf("Mesa reservada com sucesso\n");
     break;
 
   case 'M':
-    r[l][c].comanda = malloc(sizeof(Pedido) * 8);
+    r[l][c].comanda = calloc(sizeof(Pedido), 8);
     r[l][c].tam_comanda = 8;
     printf("Mesa reservada com sucesso\n");
     break;
 
   case 'G':
-    r[l][c].comanda = malloc(sizeof(Pedido) * 12);
+    r[l][c].comanda = calloc(sizeof(Pedido), 12);
     r[l][c].tam_comanda = 12;
     printf("Mesa reservada com sucesso\n");
     break;
