@@ -54,6 +54,7 @@ int main(void) {
       printf("Digite uma opção:\n");
       printf("1 - adicionar pedido\n2 - Remover pedido\n");
       printf("3 - Ver pedidos da minha mesa\n");
+      printf("4 - Voltar\n");
       printf(">>> ");
       scanf(" %c", &op);
 
@@ -87,6 +88,13 @@ int main(void) {
         scanf("%d", &input_mesa);
         interface_imprimir_comanda(restaurante, input_mesa);
         break;
+      
+        case '4':
+        break;
+
+      default:
+        limpar_buffer();
+        limpar_tela();
       }
 
       salvar_estado_mesa(restaurante);
@@ -98,6 +106,7 @@ int main(void) {
       printf("Digite o id da mesa: ");
       scanf("%d", &input_mesa);
       pagar_conta(restaurante, input_mesa, arquivo);
+      salvar_estado_mesa(restaurante);
       break;
 
     case MENU_GERENCIAR_CARDAPIO:
@@ -105,7 +114,7 @@ int main(void) {
       limpar_tela();
       printf("O que deseja fazer?\n");
       printf("1 - adicionar algo ao cardapio\n2 - remover "
-             "algo do cardapio\n3 - ver cardapio\n");
+             "algo do cardapio\n3 - ver cardapio\n4 - voltar\n>>> ");
       scanf("%c", &op);
 
       switch (op) {
@@ -121,7 +130,15 @@ int main(void) {
         limpar_tela();
         interface_cardapio();
         break;
+      case '4':
+        break;
+      default:
+        limpar_buffer();
+        limpar_tela();
+        break;
       }
+
+      salvar_estado_mesa(restaurante);
       break;
 
     case MENU_SAIR:

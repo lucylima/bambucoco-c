@@ -1,34 +1,45 @@
 CC = gcc
 
-CFLAGS = -Wall -Wextra -std=c11 -g -fsanitize=address
+COMMON_FLAGS = -Wall -Wextra -std=c11 -pedantic
 
-PRODFLAGS = -O3 -std=c11 -w
+DEBUG_FLAGS = -g -fsanitize=address
+
+PROD_FLAGS = -O3 -DNDEBUG
 
 SRCS = main.c ./lib/interface.c ./lib/bambucoco.c
-
 OBJS = $(SRCS:.c=.o)
 
-TARGET = main
+TARGET_DEV = main
+TARGET_PROD = bambucoco
 
-EXE = bambucoco
+INSTALL_DIR = ./
 
-.PHONY: all clean
+.PHONY: all clean install release uninstall
 
-all: $(TARGET)
+all: CFLAGS = $(COMMON_FLAGS) $(DEBUG_FLAGS)
+all: $(TARGET_DEV)
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) 
+release: clean $(TARGET_PROD)
+
+$(TARGET_DEV): $(OBJS)
+	@echo "🔨 Linkando versão de DESENVOLVIMENTO (com ASan)..."
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET_DEV)
+
+$(TARGET_PROD): $(OBJS)
+	@echo "🚀 Linkando versão de PRODUÇÃO (Otimizada)..."
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET_PROD) -lm
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+install: release
+	@echo "📦 Instalando $(TARGET_PROD) em $(INSTALL_DIR)..."
+	@echo "✅ Instalação concluída."
 
-install: 
-	${CC} ${PRODFLAGS} ${SRCS} -o ${EXE}
-
-%.o: %.c
-	$(CC) $(PRODFLAGS) -c $< -o $@
-
+uninstall:
+	@echo "🗑️ Removendo $(TARGET_PROD)..."
+	@sudo rm -f $(INSTALL_DIR)/$(TARGET_PROD)
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	@echo "🧹 Limpando binários e objetos..."
+	rm -f $(OBJS) $(TARGET_DEV) $(TARGET_PROD)
