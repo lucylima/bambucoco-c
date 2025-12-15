@@ -71,7 +71,7 @@ int main(void) {
 
         add_pedido(restaurante, input_produto, input_mesa, input_quantidade);
         break;
-        
+
       case '2':
         limpar_tela();
         printf("Digite a mesa que deseja remover o pedido:\n>>> ");
@@ -88,8 +88,8 @@ int main(void) {
         scanf("%d", &input_mesa);
         interface_imprimir_comanda(restaurante, input_mesa);
         break;
-      
-        case '4':
+
+      case '4':
         break;
 
       default:

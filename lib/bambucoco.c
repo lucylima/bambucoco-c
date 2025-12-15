@@ -267,10 +267,11 @@ void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
   }
 
   r[l][c].valor_total = 0;
-  
+
   for (int i = 0; i < r[l][c].pos_comanda; i++) {
 
-    if (r[l][c].comanda[i].id_item == -1 || r[l][c].comanda[i].quantidade == 0) {
+    if (r[l][c].comanda[i].id_item == -1 ||
+        r[l][c].comanda[i].quantidade == 0) {
       continue;
     }
 
