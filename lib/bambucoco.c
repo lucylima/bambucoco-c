@@ -307,6 +307,11 @@ void remover_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
   int l, c = 0;
 
   achar_mesa(r, input_mesa, &l, &c);
+  
+  if(r[l][c].status == 'L') {
+    printf("Mesa livre! Não há pedidos para remover.\n");
+    return;
+  }
 
   if (r[l][c].pos_comanda < 1) {
     printf("Sem produtos na comanda\n");

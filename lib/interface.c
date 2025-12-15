@@ -114,13 +114,18 @@ void interface_imprimir_comanda(Mesa r[MAX_LINHAS][MAX_COLUNAS],
   printf("+------------------------------------------+\n");
 }
 
-void limpar_tela() { printf("\e[1;1H\e[2J"); }
+void limpar_tela() { printf("\033[2J\033[H");  }
 
 void interface_imprimir_comanda_id(Mesa r[MAX_LINHAS][MAX_COLUNAS],
                                 int input_mesa) {
   int l, c = 0;
 
   achar_mesa(r, input_mesa, &l, &c);
+  
+  if(r[l][c].status == 'L') {
+    printf("Mesa livre, sem comanda\n");
+    return;
+  }
 
   if (r[l][c].pos_comanda < 1) {
     printf("Sem produtos na comanda\n");
