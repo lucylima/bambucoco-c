@@ -1,19 +1,16 @@
-# Makefile for C program
-
-# Compiler to use
 CC = gcc
 
-# Compiler flags
-CFLAGS = -Wall -Wextra -std=c11
+CFLAGS = -Wall -Wextra -std=c11 -g -fsanitize=address
 
-#Source files
+PRODFLAGS = -O3 -std=c11 -w
+
 SRCS = main.c ./lib/interface.c ./lib/bambucoco.c
 
-# Object files
 OBJS = $(SRCS:.c=.o)
 
-# Executable name
 TARGET = main
+
+EXE = bambucoco
 
 .PHONY: all clean
 
@@ -24,6 +21,14 @@ $(TARGET): $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+
+install: 
+	${CC} ${PRODFLAGS} ${SRCS} -o ${EXE}
+
+%.o: %.c
+	$(CC) $(PRODFLAGS) -c $< -o $@
+
 
 clean:
 	rm -f $(OBJS) $(TARGET)
