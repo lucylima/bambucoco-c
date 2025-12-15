@@ -299,12 +299,15 @@ void salvar_historico(Mesa r, FILE *arquivo) {
   struct tm *struct_tempo = localtime(&tempo_atual);
   char buffer_tempo[100];
 
+  srand((unsigned)time(&tempo_atual));
+
+  int num_ascii = (rand() % (126 - 33 + 1)) + 33;
+
   strftime(buffer_tempo, sizeof(buffer_tempo), "%d/%m/%Y %H:%M", struct_tempo);
 
-  fprintf(arquivo, "id;tamanho;nome;valor_total;data\n");
-
-  fprintf(arquivo, "%d;%d;%s;%.2f;%s\n", r.id_mesa, r.tam_comanda, r.nome,
-          r.valor_total, buffer_tempo);
+  fprintf(arquivo, "%d;%d;%s;%.2f;%s;%d-%d-%c\n", r.id_mesa, r.tam_comanda,
+          r.nome, r.valor_total, buffer_tempo, rand() % 1000, rand() % 1000,
+          num_ascii);
 
   fclose(arquivo);
 }
