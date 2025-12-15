@@ -125,12 +125,19 @@ int main(void) {
         fclose(arquivo);
         break;
       case '2':
+        limpar_tela();
+        interface_cardapio();
+        printf("Digite o produto a ser deletado\n>>> ");
+        scanf("%d", &input_produto);
+        remover_item_cardapio(input_produto);
         break;
       case '3':
         limpar_tela();
         interface_cardapio();
         break;
       case '4':
+        limpar_buffer();
+        limpar_tela();
         break;
       default:
         limpar_buffer();

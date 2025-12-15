@@ -331,3 +331,42 @@ void remover_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
   r[l][c].comanda[input_produto].id_item = -1;
   printf("Pedido removido com sucesso\n");
 }
+
+void remover_item_cardapio(int input_produto) {
+  FILE *arquivo_origem;
+  FILE *arquivo_temp;
+  char linha[200];
+  int id_lido;
+  int encontrou = 0;
+
+  arquivo_origem = fopen("./data/restaurante/cardapio.csv", "r");
+  arquivo_temp = fopen("./data/restaurante/temp.csv", "w");
+
+  if (arquivo_origem == NULL || arquivo_temp == NULL) {
+    perror("Erro ao abrir arquivos");
+    return;
+  }
+
+  while (fgets(linha, sizeof(linha), arquivo_origem) != NULL) {
+
+    sscanf(linha, "%d;", &id_lido);
+
+    if (id_lido != input_produto) {
+      fputs(linha, arquivo_temp);
+    } else {
+      encontrou = 1;
+      printf("Item %d removido da lista.\n", input_produto);
+    }
+  }
+
+  fclose(arquivo_origem);
+  fclose(arquivo_temp);
+
+  if (encontrou) {
+    remove("./data/restaurante/cardapio.csv");
+    rename("./data/restaurante/temp.csv", "./data/restaurante/cardapio.csv");
+  } else {
+    remove("./data/restaurante/temp.csv");
+    printf("ID %d não encontrado no cardápio.\n", input_produto);
+  }
+}
