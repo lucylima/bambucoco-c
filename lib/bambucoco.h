@@ -42,7 +42,7 @@ enum Menu {
 void limpar_buffer();
 void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
 void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
-                int input_mesa);
+                int input_mesa, int quantidade);
 void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
                  FILE *arquivo);
 void salvar_historico(Mesa r, FILE *arquivo);
@@ -54,7 +54,5 @@ int carregar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
 int salvar_estado_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]);
 void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
                 int *coluna);
-void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
-                int input_mesa);
 
 #endif // BAMBUCOCO_H

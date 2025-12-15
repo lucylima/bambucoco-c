@@ -178,7 +178,7 @@ void achar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input, int *linha,
 }
 
 void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
-                int input_mesa) {
+                int input_mesa, int quantidade) {
   FILE *arquivo;
   char linha[200];
   Pedido aux_pedido;
@@ -216,6 +216,8 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
       r[l][c].comanda[pos].id_item = aux_pedido.id_item;
 
       strcpy(r[l][c].comanda[pos].nome, aux_pedido.nome);
+      
+      r[l][c].comanda[pos].quantidade = quantidade;
 
       r[l][c].comanda[pos].preco = aux_pedido.preco;
 

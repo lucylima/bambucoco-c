@@ -58,13 +58,17 @@ int main(void) {
 
       switch (op) {
       case '1':
+        int quantidade = 0;
+
         interface_cardapio();
         printf("Digite o id do produto: ");
         scanf("%d", &input_produto);
+        printf("Digite a quantidade do produto: ");
+        scanf("%d", &quantidade);
         printf("Digite o id da mesa: ");
         scanf("%d", &input_mesa);
 
-        add_pedido(restaurante, input_produto, input_mesa);
+        add_pedido(restaurante, input_produto, input_mesa, quantidade);
         break;
 
       case '3':
