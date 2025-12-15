@@ -245,8 +245,13 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
 void pagar_conta(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_mesa,
                  FILE *arquivo) {
   int l, c;
-
+  
   achar_mesa(r, input_mesa, &l, &c);
+  
+  if( r[l][c].status == 'L') {
+    printf("Mesa já está livre! Só paga conta de mesa ocupada.\n");
+    return;
+  }
 
   for (int i = 0; i < r[l][c].tam_comanda; i++) {
     r[l][c].valor_total +=
