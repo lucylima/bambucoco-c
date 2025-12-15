@@ -79,7 +79,7 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     printf("mesa ocupada! selecione outra\n");
     reservar_mesa(r);
   }
-  
+
   printf("Digite o nome do responsável pela mesa:\n>>> ");
   fgets(r[l][c].nome, sizeof(r[l][c].nome), stdin);
   r[l][c].nome[strcspn(r[l][c].nome, "\n")] = '\0';
@@ -120,7 +120,7 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     printf("Mesa reservada com sucesso\n");
     break;
   }
-  
+
   r[l][c].pos_comanda = 0;
   r[l][c].status = 'O';
   return;
@@ -179,9 +179,9 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
                 int input_mesa) {
   FILE *arquivo;
   char linha[200];
-  Pedido aux_pedido; 
+  Pedido aux_pedido;
   int pos;
-  int l, c;        
+  int l, c;
 
   arquivo = fopen("./data/restaurante/cardapio.csv", "r");
 
@@ -191,16 +191,15 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
   }
 
   achar_mesa(r, input_mesa, &l, &c);
-  
-  if(r[l][c].comanda == NULL){
 
-      r[l][c].comanda =(Pedido *)calloc(r[l][c].tam_comanda, sizeof(Pedido));
-      r[l][c].pos_comanda = 0;
+  if (r[l][c].status == 'L') {
+    printf("Mesa livre! Reserve a mesa antes de adicionar pedidos.\n");
+    return;
+  }
 
-      if (r[l][c].comanda == NULL){
-          perror("Erro ao alocar memoria para a comanda\n");
-          exit(EXIT_FAILURE);
-      }
+  if (r[l][c].pos_comanda >= r[l][c].tam_comanda) {
+    printf("Mesa cheia! junte a sua mesa ou reserve outra maior\n");
+    return;
   }
 
   while (fgets(linha, sizeof(linha), arquivo)) {
@@ -212,16 +211,13 @@ void add_pedido(Mesa r[MAX_LINHAS][MAX_COLUNAS], int input_produto,
 
       pos = r[l][c].pos_comanda;
 
-      if (r[l][c].status == 'O' && pos < r[l][c].tam_comanda) {
+      r[l][c].comanda[pos].id_item = aux_pedido.id_item;
 
-       l, c, pos, r[l][c].tam_comanda);
+      strcpy(r[l][c].comanda[pos].nome, aux_pedido.nome);
 
-        strcpy(r[l][c].comanda[pos].nome, aux_pedido.nome);
+      r[l][c].comanda[pos].preco = aux_pedido.preco;
 
-        r[l][c].comanda[pos].preco = aux_pedido.preco;
-        
       r[l][c].pos_comanda++;
-      }
     }
   }
 
@@ -259,8 +255,7 @@ void salvar_historico(Mesa r, FILE *arquivo) {
   struct tm *struct_tempo = localtime(&tempo_atual);
   char buffer_tempo[100];
 
-  strftime(buffer_tempo, sizeof(buffer_tempo), "%d/%m/%Y %H:%M",
-           struct_tempo);
+  strftime(buffer_tempo, sizeof(buffer_tempo), "%d/%m/%Y %H:%M", struct_tempo);
 
   fprintf(arquivo, "id;tamanho;nome;valor_total;data\n");
 
