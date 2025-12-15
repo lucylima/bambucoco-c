@@ -50,6 +50,7 @@ int main(void) {
       break;
 
     case MENU_GERENCIAR_COMANDA:
+      limpar_tela();
       printf("Digite uma opção:\n");
       printf("1 - adicionar pedido\n2 - Remover pedido\n");
       printf("3 - Ver pedidos da minha mesa\n");
@@ -60,6 +61,7 @@ int main(void) {
       case '1':
         int quantidade = 0;
 
+        limpar_tela();
         interface_cardapio();
         printf("Digite o id do produto: ");
         scanf("%d", &input_produto);
@@ -72,6 +74,7 @@ int main(void) {
         break;
 
       case '3':
+        limpar_tela();
         printf("Digite o id da mesa: ");
         scanf("%d", &input_mesa);
         interface_imprimir_comanda(restaurante, input_mesa);
@@ -81,6 +84,7 @@ int main(void) {
       break;
 
     case MENU_PAGAR_CONTA:
+      limpar_tela();
       printf("Digite o id da mesa: ");
       scanf("%d", &input_mesa);
       pagar_conta(restaurante, input_mesa, arquivo);
@@ -88,6 +92,7 @@ int main(void) {
 
     case MENU_GERENCIAR_CARDAPIO:
       limpar_buffer();
+      limpar_tela();
       printf("O que deseja fazer?\n");
       printf("1 - adicionar algo ao cardapio\n2 - remover "
              "algo do cardapio\n3 - ver cardapio\n");
@@ -95,6 +100,7 @@ int main(void) {
 
       switch (op) {
       case '1':
+        limpar_tela();
         arquivo = fopen("./data/restaurante/cardapio.csv", "a+");
         add_cardapio(arquivo);
         fclose(arquivo);
@@ -102,6 +108,7 @@ int main(void) {
       case '2':
         break;
       case '3':
+        limpar_tela();
         interface_cardapio();
         break;
       }
@@ -113,6 +120,8 @@ int main(void) {
       break;
 
     default:
+      limpar_buffer();
+      limpar_tela();
       break;
     }
   }
