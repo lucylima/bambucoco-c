@@ -76,15 +76,15 @@ chmod +x install.sh
   - **Modo Produção (Otimizado):**
 
     ```bash
-        make release
-        ./bambucoco
+    make release
+    ./bambucoco
     ```
 
   - **Modo Desenvolvimento (Debug + ASan):**
 
     ```bash
-        make all
-        ./main
+    make all
+    ./main
     ```
 
 4. Limpeza: Para remover binários e objetos compilados:
