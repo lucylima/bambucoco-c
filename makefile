@@ -2,7 +2,7 @@ CC = gcc
 
 COMMON_FLAGS = -Wall -Wextra -std=c11 -pedantic
 
-DEBUG_FLAGS = -g -fsanitize=address
+DEBUG_FLAGS = -g 
 
 PROD_FLAGS = -O3 -DNDEBUG
 

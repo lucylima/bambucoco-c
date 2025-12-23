@@ -1,4 +1,4 @@
-# BambuCoco
+# Sistema de restaurante em C
 
 ### Fase 1: Configuração e Estrutura Básica
 Esta fase prepara o terreno para o código.
@@ -34,7 +34,7 @@ Esta fase prepara o terreno para o código.
     - [x] Verificar se a mesa está aberta.
     - [x] Buscar item no menu pelo ID.
     - [x] Adicionar ao vetor de pedidos da struct `Mesa`.
-    - [ ] Atualizar o subtotal da mesa.
+    - [x] Atualizar o subtotal da mesa.
 - [x] **Implementar `fechar_conta()`**: Somar tudo, exibir o total, salvar no relatório e limpar a struct da mesa (resetar para "Livre").
 - [x] **Implementar `reservar_mesa()`**: Reservar a mesa, checar se está livre e perguntar qual o tamanho da mesa.
 

@@ -76,9 +76,9 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
 
   achar_mesa(r, input, &l, &c);
 
-  if (r[l][c].status == 'O') {
+  if (r[l][c].status == 'O' || r[l][c].status == 'J') {
     printf("mesa ocupada! selecione outra\n");
-    reservar_mesa(r);
+    return;
   }
 
   limpar_buffer();
@@ -117,9 +117,34 @@ void reservar_mesa(Mesa r[MAX_LINHAS][MAX_COLUNAS]) {
     break;
 
   case 'G':
-    r[l][c].comanda = calloc(sizeof(Pedido), 12);
-    r[l][c].tam_comanda = 12;
-    printf("Mesa reservada com sucesso\n");
+
+    if (c + 2 >= MAX_COLUNAS) {
+      printf("Não há mesas suficientes para reservar\n");
+      return;
+    }
+
+    int count = 0;
+
+    for (int i = 1; i <= 3; i++) {
+
+      if (r[l][c + i].status == 'O' || r[l][c + i].status == 'J') {
+        count++;
+      }
+
+      if (count >= 2) {
+        printf("Não há mesas suficientes para reservar\n");
+        return;
+      }
+    }
+
+    for (int i = 1; i < 3; i++) {
+      r[l][c + i].status = 'J';
+      strcpy(r[l][c].nome, r[l][c + i].nome);
+      r[l][c + i].capacidade = 'J';
+      r[l][c].comanda = calloc(sizeof(Pedido), 4);
+      r[l][c + i].tam_comanda = 4;
+    }
+
     break;
   }
 
