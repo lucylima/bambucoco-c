@@ -1,29 +1,23 @@
 #include "interface.h"
 #include "bambucoco.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 void menu() { // funcao que imprime um menu simples em ASCII
-  FILE *arq;
+  char *opcoes[] = {
+      "Ver restaurante",    "Reservar Mesa",
+      "Gerenciar comanda",  "Finalizar e pagar a comanda",
+      "Gerenciar cardapio", "Sair",
+  };
 
-  char buffer[200];
+  printf("╔════════════════════════════════════════════════╗\n");
+  printf("║      Menu                                      ║\n");
 
-  arq = fopen("./data/interface/menu-ascii.txt", "r");
-
-  // se arquivo esta com problemas o programa nao roda
-  if (arq == NULL) {
-    printf("Erro ao abrir o arquivo, encerrando\n");
-    exit(1);
+  for (int i = 0; i < 6; i++) {
+    printf("║   %d. %-*s║\n\a", i + 1, 42, opcoes[i]);
   }
 
-  while (fgets(buffer, sizeof(buffer), arq) != NULL) {
-    printf("%s", buffer);
-  }
-
-  printf("\n");
-
-  fclose(arq);
+  printf("╚════════════════════════════════════════════════╝\n");
 }
 
 void interface_restaurante(Mesa m[MAX_LINHAS][MAX_COLUNAS]) {
@@ -114,15 +108,15 @@ void interface_imprimir_comanda(Mesa r[MAX_LINHAS][MAX_COLUNAS],
   printf("+------------------------------------------+\n");
 }
 
-void limpar_tela() { printf("\033[2J\033[H");  }
+void limpar_tela() { printf("\033[2J\033[H"); }
 
 void interface_imprimir_comanda_id(Mesa r[MAX_LINHAS][MAX_COLUNAS],
-                                int input_mesa) {
+                                   int input_mesa) {
   int l, c = 0;
 
   achar_mesa(r, input_mesa, &l, &c);
-  
-  if(r[l][c].status == 'L') {
+
+  if (r[l][c].status == 'L') {
     printf("Mesa livre, sem comanda\n");
     return;
   }
@@ -137,9 +131,8 @@ void interface_imprimir_comanda_id(Mesa r[MAX_LINHAS][MAX_COLUNAS],
   printf("+--------------------------------------------+\n");
 
   for (int i = 0; i < r[l][c].pos_comanda; i++) {
-    printf("| %d  -  %s  -  %.2f  -  %d\n", i,
-           r[l][c].comanda[i].nome, r[l][c].comanda[i].preco,
-           r[l][c].comanda[i].quantidade);
+    printf("| %d  -  %s  -  %.2f  -  %d\n", i, r[l][c].comanda[i].nome,
+           r[l][c].comanda[i].preco, r[l][c].comanda[i].quantidade);
   }
   printf("+------------------------------------------+\n");
   printf("+ -1 significa que o produto foi removido  +\n");
