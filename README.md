@@ -1,4 +1,4 @@
-# 🎋 BambuCoco - Sistema de Gestão de Restaurante (C/CLI)
+# BambuCoco - Sistema de Gestão de Restaurante (C/CLI)
 
 ![Language](https://img.shields.io/badge/Language-C11-blue?style=for-the-badge&logo=c)
 ![Platform](https://img.shields.io/badge/Platform-Linux-orange?style=for-the-badge&logo=linux)
@@ -13,7 +13,7 @@
 
 ---
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 **BambuCoco** é um sistema de gerenciamento de mesas e pedidos para restaurantes que opera via Interface de Linha de Comando (CLI). 
 
@@ -57,8 +57,9 @@ bambucoco-c/
 ### Passo a Passo
 
 1. Clone o repositório:
+
 ```bash
-git clone [https://github.com/lucylima/bambucoco-c.git](https://github.com/lucylima/bambucoco-c.git)
+git clone https://github.com/lucylima/bambucoco-c.git
 cd bambucoco-c
 ``` 
 
@@ -72,13 +73,14 @@ chmod +x install.sh
 
 3. Compilação e Execução:
 
-    - Modo Produção (Otimizado):
+  - **Modo Produção (Otimizado):**
+
     ```bash
         make release
         ./bambucoco
     ```
 
-    - Modo Desenvolvimento (Debug + ASan):
+  - **Modo Desenvolvimento (Debug + ASan):**
 
     ```bash
         make all
